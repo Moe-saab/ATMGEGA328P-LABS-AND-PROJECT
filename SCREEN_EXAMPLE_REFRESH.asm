@@ -1,6 +1,6 @@
 ;Author : mohamad saab
 ;In this code I turn on all the leds in the screen but I do that with different refreshment rates that you can change
-;in lines and for register R25
+;in lines 41 and 105 for register R25
 ;The refreshing is important since to print certain character it will have different column patterns for each row so can't turn on all 
 ;rows at same time . Solution is to send the column pattern for each row alone and then jump to next row and put the next column patter and
 ;so on but at a speed enough for the eye to see a still screen.
@@ -38,13 +38,13 @@ OUT TCNT0,R20	; the refreshing with human eye and at same time it is almost the 
 
 ;Now here test several values for R25 which each time will increase refreshment speed by decreasing the 
 ;counter used in the interrupt ===> i.e it will let the function in interrupt execute sooner (after less ins and outs of the interrupt)
-LDI R25,0X01 ;TRY 60 in hex 0X3C, this is the counter will be used in the interrupt as I just explained
+LDI R25,0X3C ;TRY 60 in hex 0X3C, this is the counter will be used in the interrupt as I just explained
 			 ;TRY 30 IN HEX 1E
 			 ;TRY 15 IN HEX 0X0F
 			 ;TRY 5 IN HEX 0X05
 			 ;TRY 1 IN HEX 0X01 AT THIS SPEED YOU STOP SEEING WITH THE NAKED EYE THE REFRESHING
 			
-			 ; DON'T FORGET ALSO TO CHANGE R25 IN LINE ALSO !!!!!!!!!!!!!
+			 ; DON'T FORGET ALSO TO CHANGE R25 IN LINE 105 ALSO !!!!!!!!!!!!!
 
 
 LDI R27,0X07 ; will be used later in the interrupt to go through all the rows one at a time
@@ -152,7 +152,7 @@ SBI PORTB,4
 CBI PORTB,4
 
 
-LDI R25,0X01
+LDI R25,0X3C
 
 exit:
 OUT TCNT0,R20
