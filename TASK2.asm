@@ -1,0 +1,25 @@
+; task 2 turn on the lower led when the switch is high
+;Author : mohamad saab
+.INCLUDE "m328pdef.inc" 
+.ORG 0x0000
+	RJMP init 
+init:
+CBI DDRB,0 ;PORTB 0 IS INPUT
+SBI PORTB,0 ; PULL UP RESISTOR
+SBI DDRC,3 ; PORTC 3 IS OUTPUT
+SBI PORTC,3 ;TURN OFF INITIALLY
+
+main:
+IN R5,PINB
+BST R5,0
+BRTC SWITCHLOW
+
+SWITCHHIGH:
+CBI PORTC,3
+RJMP main
+
+SWITCHLOW:
+SBI PORTC,3
+RJMP main
+
+

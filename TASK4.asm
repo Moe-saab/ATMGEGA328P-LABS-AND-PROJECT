@@ -1,0 +1,21 @@
+; task 4
+;Author : mohamad saab
+.INCLUDE "m328pdef.inc" 
+.ORG 0x0000
+	RJMP init 
+init:
+SBI DDRB,1 ; PORTB 1 IS OUTPUT
+CBI PORTB,1 ;TURN OFF INITIALLY
+
+main:
+SBI PINB,1
+
+LDI R16,0Xff
+LOOP1:
+LDI R17,0X20
+LOOP2:
+DEC R17
+BRNE LOOP2
+DEC R16
+BRNE LOOP1
+RJMP main
